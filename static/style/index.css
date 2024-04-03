@@ -1,0 +1,28 @@
+.col-lg-7 button{
+    background-color:#004658 !important;
+    color: white;
+    border: none !important;
+    top: 10%;
+    left: 97%;
+}
+.col-lg-7 h1{
+    width: 30vw;
+   
+    
+}
+.col-lg-7 button:hover{
+    background-color: #008489 !important;
+    text-decoration: none;
+    
+}
+.form-group button{
+    background-color: #008489 !important;
+    color: white;
+    border: none !important;
+
+
+}
+.section.newsletter .submit{
+padding: 4px 90px 38px 32px;
+font-size: 14px !important;
+}

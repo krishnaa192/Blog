@@ -1,0 +1,66 @@
+
+.post .post-tags {
+  margin-top: 30px;
+}
+.btn a{
+  text-decoration: none;
+  color: #0cc !important;
+}
+.errorlist{
+  color: red;
+  display: none;
+
+}
+ul li{
+  list-style: none;
+}
+label{
+  display: inline;
+  font-weight: bold;
+
+}
+.tm-color-primary{
+  color: #0cc;
+
+}
+textarea.form-control{
+  width: 50%;
+  height: 50px !important;
+  resize: none;
+}
+hr{
+  color: #0cc;
+  margin: 0px -150px 0px 0px;
+  padding: 0px;
+}
+.post .post-tags .tag {
+  padding: 5px 25px;
+  border: 2px solid #0e0e0e;
+  margin: 5px;
+  color: #777;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+}
+
+.post .post-tags .tag:hover {
+  background: #999;
+  color: #fff;
+  border-color: #999;
+}
+
+.post .meta-last::after {
+  display: none;
+}
+
+/* Latest Posts Section Media Query ------------------------------------- */
+@media (max-width: 767px) {
+  .post {
+    margin-bottom: 40px;
+  }
+  .post:last-of-type {
+    margin-bottom: 0;
+  }
+}

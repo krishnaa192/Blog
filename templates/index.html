@@ -1,0 +1,198 @@
+
+{% load static %}
+{% block css%}
+<link rel="stylesheet" href="{% static 'style/index.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/style.default.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/style.green.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/style.pink.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/style.red.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/style.sea.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/style.violet.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/style.blue.css' %}"/>
+<link rel="stylesheet" href="{% static 'style/vendor/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'style/vendor/font-awesome/css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'static/fontastic.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="{% static 'style/vendor/@fancyapps/fancybox/jquery.fancybox.min.css'%}">
+  
+<!-- <link rel="stylesheet" href="{% static 'style/style.css' %}"/> -->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>  
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&display=swap"
+  rel="stylesheet"/>
+{% endblock css %} 
+{% include 'header.html' %}
+{% block content%}
+<!-- Hero Section-->
+<section style="background: url('media/images/main.jpg'); background-size: cover; background-position: center center;z-index: 1;background-repeat: no-repeat;"
+  class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <h1>Write your thoughts!!</h1>
+    <button>
+      <a href="{%url 'Submit_Form' %}">
+          <h5>Create</h5>
+      </a>
+     </button>
+      </div>
+    </div><a href=" ",class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
+  </div>
+</section>
+<!-- Intro Section-->
+<section class="intro">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1 class="h3">Trending post</h1>
+      
+      </div>
+    </div>
+  </div>
+</section>
+<section class="featured-posts no-padding-top">
+  <div class="container">
+    <!-- Post-->
+    {% for Blog in work %}
+    <div class="row d-flex align-items-stretch">
+      {% if not forloop.first and not forloop.last %}
+      <div class="image col-lg-5"> <img src="{{Blog.blog_image.url}}" alt="image" /> </div>
+      {% endif %}
+      <div class="text col-lg-7">
+        <div class="text-inner d-flex align-items-center">
+          <div class="content">
+            <header class="post-header">
+              <div class="category">
+                <!-- {% for cat in post.categories.all %}
+                <a href="/cat/{{ cat.slug }}">{{ cat }}</a>
+                {% endfor %} -->
+              </div>
+              <a href="{% url 'Read' Blog.id %}">
+                <h2 class="h4">{{Blog.blog_title}}</h2>
+              </a>
+            </header>
+            <p>{{Blog.desc}}</p>
+            <footer class="post-footer d-flex align-items-center"><a href="#"
+                class="author d-flex align-items-center flex-wrap">
+                <div class="avatar"><img src="{{Blog.Author.auth_image.url }}" alt="..." class="img-fluid"></div>
+                <div class="title">  <a href="{% url 'userProfile' Blog.id %}"> <span>{{Blog.Author}}</span> </a></div>
+              </a>
+              <div class="date"><i class="icon-clock"></i>{{Blog.upload}} ago</div>
+              <!-- <div class="comments"><i{{Blog.desc}} class="icon-comment"></i>{{ post.comment_count }}</div> -->
+            </footer>
+          </div>
+        </div>
+      </div>
+      {% if forloop.first or forloop.last %}
+       <div class="image col-lg-5"><img src="{{ Blog.blog_image.url }}" alt="..."></div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<!-- Divider Section-->
+<section
+  style="background: url('media/images/bg2.jpg'); background-size: cover; background-position: center ,top; overflow: hidden;height:346px">
+    <div class="row">
+       <div class="col-md-7">
+       
+      </div> 
+    </div>
+  </div>
+</section>
+<!-- Latest Posts -->
+<section class="latest-posts">
+  <div class="container">
+    <header>
+      <h2>Latest from the blog</h2>
+      <p class="text-big"></p>
+    </header>
+
+    <div class="row">
+      {% for Blog in work %}
+      <div class="post col-md-4">
+        <div class="post-thumbnail"><a href="{% url 'Read' Blog.id %}"><img src="{{Blog.blog_image.url  }}"
+              alt="..." class="img-fluid"></a></div>
+        <div class="post-details">
+          <div class="post-meta d-flex justify-content-between">
+            <div class="date">{{Blog.upload | date }}</div>
+            <div class="category">
+              <!-- {% for cat in latest.categories.all %}
+              <a href="/cat/{{ cat.slug }}">{{ cat }}</a>
+              {% endfor %} -->
+            </div>
+          </div><a href="{{ latest.get_absolute_url }}">
+            <h3 class="h4">{{ Blog.blog_title}}</h3>
+          </a>
+          <p class="text-muted">{{Blog.desc}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+<!-- Newsletter Section-->
+<section class="newsletter no-padding-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Subscribe to Newsletter</h2>
+        
+      </div>
+      <div class="col-md-8">
+        <div class="form-holder">
+          <form action="." method="POST">{% csrf_token %}
+            <div class="form-group">
+              <input type="email" name="email" id="email" placeholder="Type your email address" required>
+              <button type="submit" class="submit">Subscribe</button>
+              {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                <!-- <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li> -->
+                {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Gallery Section-->
+<!-- <section class="gallery no-padding">
+  <div class="row">
+    <div class="mix col-lg-3 col-md-3 col-sm-6">
+      <div class="item"><a href="{% static 'img/gallery-1.jpg' %}" data-fancybox="gallery" class="image"><img
+            src="{% static 'img/gallery-1.jpg' %}" alt="..." class="img-fluid">
+          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
+        </a></div>
+    </div>
+    <div class="mix col-lg-3 col-md-3 col-sm-6">
+      <div class="item"><a href="{% static 'img/gallery-2.jpg' %}" data-fancybox="gallery" class="image"><img
+            src="{% static 'img/gallery-2.jpg' %}" alt="..." class="img-fluid">
+          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
+        </a></div>
+    </div>
+    <div class="mix col-lg-3 col-md-3 col-sm-6">
+      <div class="item"><a href="{% static 'img/gallery-3.jpg' %}" data-fancybox="gallery" class="image"><img
+            src="{% static 'img/gallery-3.jpg' %}" alt="..." class="img-fluid">
+          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
+        </a></div>
+    </div>
+    <div class="mix col-lg-3 col-md-3 col-sm-6">
+      <div class="item"><a href="{% static 'img/gallery-4.jpg' %}" data-fancybox="gallery" class="image"><img
+            src="{% static 'img/gallery-4.jpg' %}" alt="..." class="img-fluid">
+          <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div>
+        </a></div>
+    </div>
+  </div>
+</section> -->
+<script src="{% static 'js/jquery.min.js'%}"></script>
+<script src="{% static 'js/templatemo-script.js'%}"></script>
+
+{% include 'footer.html' %}
+{% endblock content %}

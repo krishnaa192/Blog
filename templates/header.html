@@ -1,0 +1,43 @@
+{% load static %}
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'style/header.css' %}"/>
+    <script src="https://kit.fontawesome.com/055b453045.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="{% static 'style/style.css' %}"/> -->
+    <link rel="stylesheet" href="{% static 'style/style.default.css' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'style/fontastic.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="{% static 'vendor/@fancyapps/fancybox/jquery.fancybox.min.css'%}">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>  
+        {% endblock %}
+
+
+{% block body%}
+    <div class="head">
+        <div class="icon">
+            <a href="{% url 'Home'%}"> <h2>Blogme</h2></a>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="{% url 'Home'%}"><i class='fas fa-home' style='font-size:36px'></i></a> </li>
+                <li><a href="{% url 'all_blog' %}"><i class='fas fa-pen' style='font-size:36px'></i></a> </li>
+                <li><a href="{% url 'authors' %}"><i class='fas fa-users' style='font-size:36px'></i></a></li>
+             
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'profile'  user.id%}"><i class='fas fa-user-circle' style='font-size:36px'></i></a> </li>
+                <li><a href="{%  url 'logout' %}"> <i class="fa fa-sign-out" style="font-size:36px"></i></a></li>
+                {% else %}
+                <li><a href="{%  url 'login' %}"><i class='fas fa-sign-in-alt' style='font-size:36px'></i></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    
+
+    {% endblock%}
